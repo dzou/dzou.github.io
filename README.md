@@ -2,6 +2,8 @@ This is a simulator for the iterated prisoners' dilemma game. It is a project fo
 my game theory class in order to see which strategies are strong in the
 iterated prisoners' dilemma game.
 
+Check it out: http://dzou.github.io/
+
 How to use:
 
 1. Go into settings and enter in how many instances of each player you want in the game.
