@@ -30,7 +30,11 @@ function GrimTrigger() {
 	};
 
 	this.updateScoreHistory = function() {
-		this.scoreHistory.push(this.score);
+		if (this.score > 0) {
+			this.scoreHistory.push(this.score);
+		} else {
+			this.scoreHistory.push(0);
+		}	
 	};
 }
 
@@ -51,7 +55,11 @@ function Pushover() {
 	};
 
 	this.updateScoreHistory = function() {
-		this.scoreHistory.push(this.score);
+		if (this.score > 0) {
+			this.scoreHistory.push(this.score);
+		} else {
+			this.scoreHistory.push(0);
+		}	
 	};
 }
 
@@ -72,7 +80,11 @@ function Defector() {
 	};
 
 	this.updateScoreHistory = function() {
-		this.scoreHistory.push(this.score);
+		if (this.score > 0) {
+			this.scoreHistory.push(this.score);
+		} else {
+			this.scoreHistory.push(0);
+		}	
 	};
 }
 
@@ -101,7 +113,11 @@ function TitForTat() {
 	};
 
 	this.updateScoreHistory = function() {
-		this.scoreHistory.push(this.score);
+		if (this.score > 0) {
+			this.scoreHistory.push(this.score);
+		} else {
+			this.scoreHistory.push(0);
+		}	
 	};
 }
 
@@ -130,7 +146,11 @@ function Random() {
 	};
 
 	this.updateScoreHistory = function() {
-		this.scoreHistory.push(this.score);
+		if (this.score > 0) {
+			this.scoreHistory.push(this.score);
+		} else {
+			this.scoreHistory.push(0);
+		}	
 	};
 }
 
@@ -171,7 +191,11 @@ function ProbabilityResponder() {
 	};
 
 	this.updateScoreHistory = function() {
-		this.scoreHistory.push(this.score);
+		if (this.score > 0) {
+			this.scoreHistory.push(this.score);
+		} else {
+			this.scoreHistory.push(0);
+		}	
 	};
 }
 
@@ -224,7 +248,8 @@ function runSimulation(params) {
 	for (var i = 0; i < ITERATIONS; i++) {
 		for (var x = 0; x < strategyList.length; x++) {
 			for (var y = x + 1; y < strategyList.length; y++) {
-				if (strategyList[x].score > 0 && strategyList[y].score > 0)
+				if (strategyList[x].scoreHistory[strategyList[x].scoreHistory.length - 1] > 0 
+					&& strategyList[y].scoreHistory[strategyList[y].scoreHistory.length - 1] > 0)
 					playRound(strategyList[x], strategyList[y]);
 			}
 		}
