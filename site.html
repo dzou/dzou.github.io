@@ -1,0 +1,90 @@
+<html>
+	<header>
+		<title>Iterated Prisoners' Dilemma Simulation</title>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script src="main.js"></script>
+		<script src="simulation.js"></script>
+		<script src="jquery.flot.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="foundation.css">
+
+	</header>
+
+	<body>
+		<nav class="top-bar" data-topbar>
+		  <ul class="title-area">
+		    <li class="name">
+		      <h1><a href="#">Iterated Prisoners' Dilemma</a></h1>
+		    </li>
+		  </ul>
+
+		  <section class="top-bar-section">
+
+		    <!-- Left Nav Section -->
+		    <ul class="left">
+		      <li><a id="settingsToggle" href="#">Settings</a></li>
+		      <li><a id="graphsToggle" href="#">Graphs</a></li>
+		    </ul>
+		  </section>
+		</nav>
+
+		<br>
+		
+		<div class="row" id="resultsDiv">
+			<div class="large-6 columns">
+				<table>
+					<tr>
+						<td>
+							Pushover: 
+							<input id="pushoverCount" type="text" min="0" maxlength="2">
+						</td>
+						<td>
+							Tit-for-tat:
+							<input id="titForTatCount" type="text" min="0" maxlength="2">
+						</td>
+					</tr>
+					<tr>
+						<td>GrimTrigger:
+							<input id="grimTriggerCount" type="text" min="0" maxlength="2">
+						</td>
+						<td>Random:
+							<input id="randomCount" type="text" min="0" maxlength="2">
+						</td>
+					</tr>
+					<tr>
+						<td>Defector:
+							<input id="defectorCount" type="text" min="0" maxlength="2">
+						</td>
+						<td>Probability Responder:	
+							<input id="probabilityResponderCount" type="text" min="0" maxlength="2">
+						</td>
+					</tr>
+				</table>
+				<button id="button" type="button">Run Simulation</button>
+			</div>
+
+
+			<div id="rankings" class="large-6 columns">
+
+			</div>
+
+			<!--
+			<div class="large-4 columns">
+				<textarea id="textarea"></textarea>
+			</div> -->
+
+		</div>
+
+		<div class="row" id="graphsDiv">
+			<div class="large-8 columns" id="graph" style="width:600px;height:300px">
+			</div>
+
+			<div class="large-4 columns" id="legend">
+			</div>
+
+		</div>
+		
+
+	</body>
+
+</html>
