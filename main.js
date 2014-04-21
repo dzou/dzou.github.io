@@ -31,6 +31,9 @@ $(window).load(
 				    },
 				    legend: {
 					    container: $("#legend")
+					},
+					yaxis: {
+						show: false
 					}
 				};
 
