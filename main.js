@@ -8,7 +8,10 @@ $(window).load(
 		button.click(
 			function() {
 
-				ITERATIONS = parseInt($("iterations").val());
+				var iterationsParam = parseInt($("#iterations").val());
+				if (iterationsParam != null && iterationsParam > 0) {
+					ITERATIONS = iterationsParam;
+				}
 
 				// Process Strategy Counts
 				var params = {};
