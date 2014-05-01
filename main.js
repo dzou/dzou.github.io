@@ -7,6 +7,10 @@ $(window).load(
 
 		button.click(
 			function() {
+
+				ITERATIONS = parseInt($("iterations").val());
+
+				// Process Strategy Counts
 				var params = {};
 				params['pushover'] = parseInt($("#pushoverCount").val());
 				params['titForTat'] = parseInt($("#titForTatCount").val());
