@@ -7,6 +7,7 @@
 		<script src="simulation.js"></script>
 		<script src="jquery.flot.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="foundation.css">
+		<link rel="stylesheet" type="text/css" href="myCss.css">
 
 	</header>
 
@@ -22,8 +23,9 @@
 
 		    <!-- Left Nav Section -->
 		    <ul class="left">
-		      <li><a id="settingsToggle" href="#">Settings</a></li>
-		      <li><a id="graphsToggle" href="#">Graphs</a></li>
+		      <li><a class="button [radius round]" id="settingsToggle" href="#">Settings</a></li>
+		      <li><a class="alert button" id="graphsToggle" href="#">Graphs</a></li>
+		      <li><a class="button [radius round]" id="instructionsToggle" href="#">Instructions</a></li>
 		    </ul>
 		  </section>
 		</nav>
@@ -31,8 +33,11 @@
 		<br/>
 		
 		<div class="row" id="resultsDiv">
-			<div class="large-6 columns">
+			<textarea rows="4" cols="50" id="debug"></textarea>
+			<div class="large-9 columns">
 				<table>
+				
+					<h4>Player Counts</h4>
 					<tr>
 						<td>
 							Iterations:
@@ -48,6 +53,10 @@
 							Tit-for-tat:
 							<input id="titForTatCount" type="text" min="0" maxlength="2">
 						</td>
+						<td>
+							Suspicious Tit-for-tat:
+							<input id="suspiciousTitForTatCount" type="text" min="0" maxlength="2">
+						</td>
 					</tr>
 					<tr>
 						<td>GrimTrigger:
@@ -56,13 +65,27 @@
 						<td>Random:
 							<input id="randomCount" type="text" min="0" maxlength="2">
 						</td>
+						<td>
+							Tit for Two Tats:
+							<input id="titForTwoTatCount" type="text" min="0" maxlength="2">
+						</td>
 					</tr>
 					<tr>
 						<td>Defector:
 							<input id="defectorCount" type="text" min="0" maxlength="2">
 						</td>
-						<td>Probability Responder:	
-							<input id="probabilityResponderCount" type="text" min="0" maxlength="2">
+						<td>Generous Randomizer:	
+							<input id="generousRandomizerCount" type="text" min="0" maxlength="2">
+						</td>
+						<td>
+							Double Tit for Tat:
+							<input id="doubleTitForTatCount" type="text" min="0" maxlength="2">
+						</td>
+					</tr>
+
+					<tr>
+						<td>GrimTrigger 75%:
+							<input id="grim75count" type="text" min="0" maxlength="2">
 						</td>
 					</tr>
 				</table>
@@ -70,7 +93,7 @@
 			</div>
 
 
-			<div id="rankings" class="large-6 columns">
+			<div id="rankings" class="large-3 columns">
 
 			</div>
 
@@ -82,13 +105,127 @@
 		</div>
 
 		<div class="row" id="graphsDiv">
+			<div class="row">
 
-			<div class="large-8 columns" id="graph" style="width:600px;height:300px">
+				
+
+				<div class="large-8 columns">
+					<h5>Score of Best Performing Player of Each Strategy vs. Rounds</h5>
+				</div>
+				
+			</div>
+			<div class="row">
+
+				<div class="large-8 columns" id="graph" style="width:600px;height:300px">
+				</div>
+
+				<div class="large-4 columns" id="legend">
+				</div>
+			</div>
+			
+			
+		</div>
+
+		<div class id="instructionsDiv">
+			<center><h3>Instructions</h3></center>
+
+			<div class="row">
+				<div class="large-4 columns">
+					<h4>How this works: </h4>
+					<p>
+						This app allows you to create a group of players who will play the group iterated prisoners' dilemma
+						with each other.
+						On the settings tab, you will specify how many players of each strategy will be entered into the
+						pool and how many rounds of the game to be played. 
+					</p>
+				</div>
+
+				<div class="large-4 columns">
+					<h4>Rules</h4>
+					<p>
+						At each round, each player plays one prisoners' dilemma game with every other player in the pool.
+						Each player has a cumulative score which will be updated for every game that he plays. In each prisoners'
+						dilemma game that the player plays he has the option of cooperating or defecting against his opponent.
+					</p>
+				</div>
+
+				<div class="large-4 columns">
+					<h4>Payoffs</h4>
+
+					<ul>
+					<li>If both players cooperate, both get +1.</li>
+					<li>If player 1 cooperates and player 2 defects, player 1 gets -2 and player 2 gets +2.</li>
+					<li>If both players defect, both get -1.</li>
+					</ul>
+				</div>
+				
 			</div>
 
-			<div class="large-4 columns" id="legend">
-			</div>
+			<div class="row">
+				<div class="large-4 columns">
+					<h4>Additional stipulations</h4>
+					<p>
+						This game has an additional twist. If a player's score drops below zero, the player is considered a "loser" and is removed from the pool. Every player starts off with a score of 50.
+					</p>
+				</div>
 
+
+
+				<div class="large-8 columns">
+					<h4>Explanation of Strategies</h4>
+
+					<ul>
+						<li>
+							Pushover: Cooperates 100% of the time.
+						</li>
+
+						<li>
+							Defector: Defects 100% of the time.
+						</li>
+
+						<li>
+							Random: Cooperates 50% of the time, defects 50% of the time randomly.
+						</li>
+
+						<li>
+							GrimTrigger (Chris): Cooperates with opponent until the first time opponent defects.
+							Then defect against opponent forever.
+						</li>
+
+						<li>
+							Double Tit For Tat (Dr. Schwab): Cooperates on the first two moves. On move t, look
+							at opponent's move for t-1 and t-2. If they are both the same, perform the opponent's
+							move. Else, make the move you made on the previous turn t-1.
+						</li>
+
+						<li>
+							Generous Randomizer (Nate): Cooperate with 90% probability, defect with 10% probability.
+						</li>
+
+						<li>
+							Tit For Tat (Robin): Cooperate on turn 1. For turns after turn 1, make the move that
+							your opponent made on the previous turn.
+						</li>
+
+						<li>
+							Suspicious Tit For Tat (David): Defect on turn 1. For turns after turn 1, make the move that
+							your opponent made on the previous turn.
+						</li>
+
+						<li>
+							Tit for Two Tats (Melissa): Cooperate on turn 1 and turn 2. If opponent's last two turns were
+							defects, defect as well. Else cooperate.
+						</li>
+
+						<li>
+							Grim75 (Vickie): Play Grim Trigger for 75% of the game (after 75% of the turns have passed).
+							Then always defect.
+						</li>
+					</ul>
+					
+				</div>
+
+			<div>
 		</div>
 		
 

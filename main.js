@@ -4,6 +4,8 @@ $(window).load(
 		var button = $("#button");
 
 		$("#graphsDiv").hide();
+		$("#instructionsDiv").hide();
+		$("#debug").hide();
 
 		button.click(
 			function() {
@@ -20,8 +22,15 @@ $(window).load(
 				params['grimTrigger'] = parseInt($("#grimTriggerCount").val());
 				params['random'] = parseInt($("#randomCount").val());	
 				params['defector'] = parseInt($("#defectorCount").val());
-				params['probabilityResponder'] = parseInt($("#probabilityResponderCount").val());
+				params['generousRandomizer'] = parseInt($("#generousRandomizerCount").val());
+
+				params['doubleTitForTat'] = parseInt($("#doubleTitForTatCount").val());
+				params['suspiciousTitForTat'] = parseInt($("#suspiciousTitForTatCount").val());
+				params['titForTwoTat'] = parseInt($("#titForTwoTatCount").val());
+				params['grim75'] = parseInt($("#grim75count").val());
+
 				var result = runSimulation(params);
+				$("#debug").val(JSON.stringify(result));
 
 				var resultHtmlTable = processResults(result);
 				
@@ -32,6 +41,20 @@ $(window).load(
 				var graphData = getGraphData(result);
 
 				var options = {
+					grid: {
+						borderWidth: 1,
+						minBorderMargin: 20,
+						labelMargin: 3,
+						backgroundColor: {
+							colors: ["#fff", "#e4f4f4"]
+						},
+						margin: {
+							top: 0,
+							bottom: 30,
+							left: 20
+						}
+					},
+
 				    series: {
 				        lines: { show: true },
 				        points: { show: false }
@@ -45,6 +68,16 @@ $(window).load(
 				};
 
 				$.plot($("#graph"), graphData, options);
+
+				var yaxisLabel = $("<div class='axisLabel yaxisLabel'></div>")
+				.text("Score of Player")
+				.appendTo($("#graph"));
+				yaxisLabel.css("margin-top", yaxisLabel.width() / 2 + 50);
+
+				var yaxisLabel = $("<div class='axisLabel xaxisLabel'></div>")
+				.text("Round Number")
+				.appendTo($("#graph"));
+				yaxisLabel.css("margin-top", yaxisLabel.width() / 2 + 50);
 			}
 		);
 
@@ -52,13 +85,23 @@ $(window).load(
 			function() {
 				$("#resultsDiv").show();
 				$("#graphsDiv").hide();
+				$("#instructionsDiv").hide();
 			}
 		);
 
 		$("#graphsToggle").click(
 			function() {
+				$("#instructionsDiv").hide();
 				$("#resultsDiv").hide();
 				$("#graphsDiv").show();
+			}
+		);
+
+		$("#instructionsToggle").click(
+			function() {
+				$("#resultsDiv").hide();
+				$("#graphsDiv").hide();
+				$("#instructionsDiv").show();
 			}
 		);
 
