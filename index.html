@@ -87,6 +87,10 @@
 						<td>GrimTrigger 75%:
 							<input id="grim75count" type="text" min="0" maxlength="2">
 						</td>
+
+						<td>Very Suspicious Tit for Tat:
+							<input id="7TitForTatCount" type="text" min="0" maxlength="2">
+						</td>
 					</tr>
 				</table>
 				<button id="button" type="button">Run Simulation</button>
@@ -203,13 +207,17 @@
 						</li>
 
 						<li>
-							Tit For Tat (Robin): Cooperate on turn 1. For turns after turn 1, make the move that
+							Tit For Tat (Scott): Cooperate on turn 1. For turns after turn 1, make the move that
 							your opponent made on the previous turn.
 						</li>
 
 						<li>
 							Suspicious Tit For Tat (David): Defect on turn 1. For turns after turn 1, make the move that
 							your opponent made on the previous turn.
+						</li>
+
+						<li>
+							Very Suspicious Tit For Tat (Robin): Defect for the first 7 rounds. Then play tit for tat.
 						</li>
 
 						<li>

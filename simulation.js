@@ -223,7 +223,7 @@ function SuspiciousTitForTat() {
 	
 	this.score = STARTING_SCORE;
 	this.scoreHistory = [this.score];
-
+	this.id = nextId();
 
 	this.getMove = function(otherid) {
 		if (this.history[otherid]== null) {
@@ -252,13 +252,51 @@ function SuspiciousTitForTat() {
 	};
 }
 
+function SevenTitForTat() {
+	this.name = "Very Suspicious Tit-For-Tat";
+	this.history = {};
+	
+	this.score = STARTING_SCORE;
+	this.scoreHistory = [this.score];
+	this.count = 0;
+	this.id = nextId();
+
+	this.getMove = function(otherid) {
+		if (this.count < 7) {
+			return 'D';
+		}
+		if (this.history[otherid]== null || this.history[otherid] == 'C') {
+			return 'C';
+		} else {
+			return this.history[otherid];
+		}
+	};
+
+	this.updateHistory = function(otherid, move) {
+		this.history[otherid] = move;
+	};
+
+	this.updateScore = function(score) {
+		this.score += score;
+	};
+
+	this.updateScoreHistory = function() {
+		this.count++;
+		if (this.score > 0) {
+			this.scoreHistory.push(this.score);
+		} else {
+			this.scoreHistory.push(0);
+		}	
+	};
+}
+
 function TitForTat() {
 	this.name = "TitForTat";
 	this.history = {};
 	
 	this.score = STARTING_SCORE;
 	this.scoreHistory = [this.score];
-
+	this.id = nextId();
 
 	this.getMove = function(otherid) {
 		if (this.history[otherid]== null || this.history[otherid] == 'C') {
@@ -419,6 +457,12 @@ function initArray(params) {
 	if (params['grim75'] != null) {
 		for (var i = 0; i < params['grim75']; i++) {
 			strategyList.push(new Grim75());
+		}
+	}
+
+	if (params['7TitForTat'] != null) {
+		for (var i = 0; i < params['7TitForTat']; i++) {
+			strategyList.push(new SevenTitForTat());
 		}
 	}
 

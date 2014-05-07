@@ -28,6 +28,7 @@ $(window).load(
 				params['suspiciousTitForTat'] = parseInt($("#suspiciousTitForTatCount").val());
 				params['titForTwoTat'] = parseInt($("#titForTwoTatCount").val());
 				params['grim75'] = parseInt($("#grim75count").val());
+				params['7TitForTat'] = parseInt($("#7TitForTatCount").val());
 
 				var result = runSimulation(params);
 				$("#debug").val(JSON.stringify(result));
